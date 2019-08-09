@@ -1,0 +1,91 @@
+<head>
+    <meta charset="UTF-8">
+    <title>课时编辑</title>
+</head>
+<body>
+    <div id="class_edit" >
+        <form id="form" class="easyui-form" method="POST">
+            <input type="hidden" name="id">
+
+            <div class="formDiv">
+                <label>课时名称:</label>
+                <input type="text" name="name" class="easyui-validatebox" data-options="required:true">
+                <span class="formSpan">*</span>
+            </div>
+            <div class="formDiv">
+                <label class="textarea">课程内容:</label>
+                <textarea name="content"  id="content" style="height:100px"  onkeyup="cal();" maxlength="50" onpropertychange="if(value.length>50) value=value.substr(0,50)"></textarea>
+            </div>
+
+            <div class="formDivCombox">
+                <label>所属课程:</label>
+                <input id="belongCourse" class="easyui-combobox" name="course.id"  style="width: 300px;" data-options="editable:false,panelHeight:160 " prompt="请选择课程..."/>
+            </div>
+
+            <div class="formDiv">
+                <label>上传视频:</label>
+                <a class="button add-but" id="classVideo_upload_btn" style="line-height:22px;height: 25px">点击上传</a>
+                <div id="classVideo_upload_queue" class="uploader-list"></div>
+                <input type="hidden" name="vedioUrl" id="VideoIds"/>
+                <input type="hidden" name="mobileVedioUrl" id="mobileVedioPath"/>
+            </div>
+
+            <div class="file-item">
+                <div id="classVideoShow"></div>
+            </div>
+
+            <div class="forSubmint">
+                <a href="#" class="easyui-linkbutton"  iconCls="icon-ok" onclick="propertyClass.editData('/service/discipline/period/saveOne');">保存</a>
+                <a href="#" class="easyui-linkbutton" id="res" iconCls="icon-redo" onclick="propertyDiscipline.resetData()" >重置</a>
+            </div>
+        </form>
+    </div>
+</div>
+    <script>
+        function cal(){
+            var length = $("#content").val().length;
+            if(length>50){
+                alert("字数请在50字以内.");
+            }
+        }
+        dictionary.getOtherDictionarieNoSelect(
+            $("#class_edit").find("#form").find("#belongCourse"),
+            "/service/discipline/period/queryCourseAll","id","name",'get');
+
+        /**
+         * 上传视频
+         */
+        var addUploadervideo;
+        var classVideo_upload = new WebuploaderTianran("classVideo_upload", "#classVideo_upload_queue");
+
+        $(function () {
+            addUploadervideo = WebUploader.create({
+                auto: true,
+                swf: '../../js/webuploader-0.1.5/Uploader.swf',
+                pick: '#classVideo_upload_btn',
+                server: '/service/fileserves/upload/file',
+                formData: {defaultPath: ""},
+                accept: {
+                    title: '视频上传',
+                    extensions: '3gp,mp4,rmvb,mov,avi,m4v',
+                    // mimeTypes:'3gp,mp4,rmvb,mov,avi,m4v'
+                },
+                duplicate: true
+            });
+            addUploadervideo.on('fileQueued', function (file) {
+                classVideo_upload.fileQueued(file);
+            });
+            addUploadervideo.on('uploadProgress', function (file, percentage) {
+                classVideo_upload.progress(file, percentage);
+            });
+            // 视频上传成功，给item添加成功class, 用样式标记上传成功。
+            addUploadervideo.on('uploadSuccess', function (file, response) {
+                classVideo_upload.videoShow(file,response,"/service/fileserves/upload/loading/?fileName="+response.data[0].filePath);
+
+            });
+            addUploadervideo.on('uploadError', function (file) {
+                $('#' + file.id).find('p.state').text('上传出错');
+            });
+        })
+    </script>
+</body>

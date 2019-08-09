@@ -1,0 +1,63 @@
+<head>
+    <meta charset="UTF-8">
+    <title>学科添加</title>
+</head>
+<body>
+    <div id="discipline_add" >
+        <form id="form" class="easyui-form" method="POST">
+            <div class="formDiv">
+                <label>学科名称:</label>
+                <input type="text" name="name" class="easyui-validatebox"  data-options="required:true">
+                <span class="formSpan">*</span>
+            </div>
+
+            <div class="formDiv">
+                <label>上传图标:</label>
+                <a class="button add-but" id="disciplineImg_upload_btn" style="line-height:22px;height: 25px">点击上传</a>
+                <div id="disciplineImg_upload_queue" class="uploader-list"></div>
+                <input type="hidden" name="icon" id="iconIds"/>
+                <input type="hidden" name="mobileIcon" id="mobileIconPath"/>
+            </div>
+
+
+            <div class="file-item">
+                <div id="courseImgShow"></div>
+            </div>
+
+            <div class="forSubmint">
+                <a href="#" class="easyui-linkbutton"  iconCls="icon-ok" onclick="propertyDiscipline.saveData('/service/discipline/discipline/saveOne');">保存</a>
+                <a href="#" class="easyui-linkbutton" id="res" iconCls="icon-redo" onclick="propertyDiscipline.resetData()" >重置</a>
+            </div>
+        </form>
+    </div>
+</div>
+    <script>
+        /**
+         * 上传图片
+         */
+        var addUploaderImg;
+        var disciplineImg_upload = new WebuploaderTianran("disciplineImg_upload", "#disciplineImg_upload_queue");
+        $(function () {
+            addUploaderImg = WebUploader.create({
+                auto: true,
+                swf: '../../js/webuploader-0.1.5/Uploader.swf',
+                pick: '#disciplineImg_upload_btn',
+                server: '/service/fileserves/upload/file',
+                formData: {defaultPath: ""},
+                accept: {
+                    title: 'Images',
+                    extensions: 'jpg,png',
+                    mimeTypes: 'image/*'
+                },
+                duplicate: true
+            });
+            addUploaderImg.on('uploadSuccess', function (file, response) {
+                disciplineImg_upload.imgShow(file,response,"/service/fileserves/upload/loading/?fileName="+response.data[0].filePath);
+
+            });
+            addUploaderImg.on('uploadError', function (file) {
+                $('#' + file.id).find('p.state').text('上传出错');
+            });
+        })
+ </script>
+</body>

@@ -1,0 +1,64 @@
+<head>
+    <meta charset="UTF-8">
+    <title>课时详情</title>
+</head>
+<body>
+<div id="class_detail" class="fromtbale_div clearfix">
+    <div class="rise-border">
+        <img src="../../img/logoImg.png" class="rise-border_logo">
+        <p class="rise-border_title">微课程在线学习</p>
+    </div>
+    <table class="fromtbale">
+        <tr>
+            <td align="center">课时名称：</td>
+            <td colspan="3" align="left" id="name"></td>
+        </tr>
+        <tr>
+            <td align="center">课时内容：</td>
+            <td colspan="3" align="left" id="content"></td>
+        </tr>
+        <tr>
+            <td align="center">所属课程：</td>
+            <td colspan="3" align="left" id="course"></td>
+        </tr>
+        <tr>
+            <td align="center">创建时间：</td>
+            <td colspan="3"align="left" id="createTime"></td>
+        </tr>
+        <tr>
+            <td align="center">课时视频：</td>
+            <td colspan="3" align="left" >
+                <div id="vedioShow"></div>
+            </td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+    function classInit() {
+        var id = $("#dialogPage").dialog("options").queryParams;
+        $.get("/service/discipline/period/queryPeriod?id=" + id, function (data) {
+            if (data) {
+                $('#class_detail').find("#name").html(data.name);
+                $('#class_detail').find("#content").html(data.content);
+                $('#class_detail').find("#createTime").html(format(data.createTime));
+                $('#class_detail').find("#course").html(data.course.name);
+                if(data.vedioUrl != "@" && data.vedioUrl != "" && data.vedioUrl != null) {
+                    var classIdAndNames = data.vedioUrl.split("@");
+                    var classIds = classIdAndNames[0].split(",");
+                    var classArray = new Array();
+                    for (var i = 0; i < classIds.length; i++) {
+                        $.get("/service/fileserves/upload/queryOne?id=" + classIds[i], function (result) {
+                            classArray.push("<video width='320' height='180' controls style='margin-left:30px;'>");
+                            classArray.push("<source src='" + "/service/fileserves/upload/loading/?fileName=" + result.filePath + "' type='video/mp4'>");
+                            classArray.push("</video>");
+                            $("#vedioShow").html(classArray.join(""));
+                        })
+                    }
+                }
+            }
+        })
+    }
+    classInit()
+ </script>
+
+</body>

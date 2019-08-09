@@ -1,0 +1,74 @@
+<head>
+    <meta charset="UTF-8">
+    <title>课时列表</title>
+    <link type="text/css" rel="stylesheet" href="../../js/jquery-easyui-1.5.3/themes/default/easyui.css"/>
+    <link type="text/css" rel="stylesheet" href="../../js/jquery-easyui-1.5.3/themes/icon.css"/>
+    <link type="text/css" rel="stylesheet" href="../../styles/main.css" />
+    <link type="text/css" rel="stylesheet" href="../../styles/theme.css" />
+    <link type="text/css" rel="stylesheet" href="../../js/webuploader-0.1.5/webuploader.tianran.css" />
+    <link type="text/css" rel="stylesheet" href="../../styles/currencyTable.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="../../styles/currencyTable.css" media="print" />
+    <script src="../../js/jquery-easyui-1.5.3/jquery.min.js"></script>
+    <script src="../../js/jquery-easyui-1.5.3/jquery.easyui.min.js"></script>
+    <script src="../../js/jquery-easyui-1.5.3/locale/easyui-lang-zh_CN.js"></script>
+    <script src="../../js/easyui.custom.js"></script>
+    <script src="../../js/dictionary.js"></script>
+    <script src="../../js/time.js"></script>
+    <script src="../../js/discipline/discipline.class.js"></script>
+    <script src="../../js/webuploader-0.1.5/webuploader.tianran.js"></script>
+    <script src="../../js/webuploader-0.1.5/webuploader.js"></script>
+</head>
+<body>
+<div id="class_list" class="easyui-panel theme-body-style" fit="true">
+
+    <div id="class_toolbar" class="top-toolbar">
+            <div class="tableFind">
+                <label>课时名称</label>
+                <input  id="name" class="easyui-textbox"/>
+                <label>课程名称</label>
+                <input  id="course_search" class="easyui-combox" name="course.id" data-options="editable:false,panelHeight:160 " prompt="请选择查询课程..."/>
+                <a  class="easyui-linkbutton tableFindBut" data-options="iconCls:'icon-search'" onclick="propertyClass.dataSearch()">查询</a>
+                <a  class="easyui-linkbutton tableFindBut" data-options="iconCls:'icon-redo'" onclick="propertyClass.dataReset()">重置</a>
+            </div>
+
+        <div id="class_but">
+            <div>
+                <a  class="easyui-linkbutton" plain="true" iconCls="icon-add" onclick="propertyClass.dialog('/workspace/class/class_add.html','新增课时',600,400);">新增</a>
+                <a  class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="propertyClass.editClass('/workspace/class/class_edit.html',' 编辑课时',600,400);">修改</a>
+                <a  class="easyui-linkbutton" plain="true" iconCls="icon-remove" onclick="propertyClass.del('/service/discipline/period/remove','删除课时','POST',600,500);">删除</a>
+            </div>
+        </div>
+    </div>
+    <table id="class_list_grid" class="easyui-datagrid" toolbar="#class_toolbar" data-options="
+                    contentType:'application/json;charset=UTF-8',
+                    url:'/service/discipline/period/queryAll',
+                    paramsType:'json',
+                    method:'get',
+                    fitColumns:true,
+                    pagination:true,
+                    singleSelect:true,
+                    checkOnSelect:false,
+                    selectOnCheck:false,
+                    striped:true,
+                    rownumbers:true,
+                    fit: true,
+                    pageSize: 5,
+                    loadFilter:EasyUIDataGridLoadFilter,
+                    loadMsg:'正在加载数据，请稍后...'">
+        <thead>
+        <tr>
+            <th data-options="field:'id',checkbox:true,align:'center'"></th>
+            <th data-options="field:'name',width:10,halign:'center',formatter:propertyClass.dataGridFormatId">课时名称</th>
+            <th data-options="field:'content',width:30,halign:'center'">课时内容</th>
+            <th data-options="field:'createTime',width:10,align:'center',formatter:propertyClass.dataGridFormatCreateTime">创建时间</th>
+            <th data-options="field:'course',width:15,halign:'center',formatter:propertyClass.dataGridCourse">归属课程</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+</body>
+
+<script>
+    dictionary.getOtherDictionarieNoSelect($("#course_search"),
+        "/service/discipline/period/queryCourseAll","id","name",'get');
+</script>

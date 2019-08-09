@@ -1,0 +1,334 @@
+.clearfix::after,
+.clearfix:before {
+    display: block;
+    content: " ";
+    clear: both;
+}
+
+.rise-border {
+    /*border-bottom: 1px solid #000000;*/
+    float: left;
+    width: 90%;
+    height: auto;
+    margin-left: 5%;
+    margin-top: 25px;
+}
+
+.rise-border_logo {
+    width: 30px;
+    height: auto;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
+.rise-border_title {
+    float: left;
+    margin: 4px 0px 0px 8px;
+    padding: 0px;
+    font-size: 16px;
+}
+
+.rise-border_p {
+    float: right;;
+    margin: 4px 0px 0px 8px;
+}
+
+.fromtbale_div {
+    width: 100%;
+    height: auto;
+}
+
+.fromtbale {
+    margin-top: 25px;
+    width: 90%;
+    border: 1px solid;
+    border-collapse: collapse;
+    margin-left: 5%;
+    float: left;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    word-break: break-all;
+
+}
+
+.fromtbale td {
+    border: 1px solid;
+    width: 15%;
+    height: 30px;
+    line-height: 30px;
+    padding: 10px 5px 5px 10px;
+}
+
+/** 多行table的样式 **/
+
+
+.voteTable_div {
+    display: none;
+    width: 100%;
+    border-collapse: collapse;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/*.voteTable_div:last-child {*/
+    /*margin: 20px 0 0;*/
+/*}*/
+.outer-div-li {
+    margin-top: 20px;
+}
+
+.outer-div-li:first-child {
+    margin-top:0px
+}
+.outer-div-li.active > .voteTable_div {
+    display: table;
+}
+
+.voteTable_div tbody,
+.voteTable_div tr {
+    width: 100%;
+}
+
+.voteTable_div td {
+    border: 1px solid #E3ECF6;
+    width: 16%;
+    height: 30px;
+    line-height: 30px;
+    padding: 10px 5px 5px 10px;
+}
+
+/**各级审批意见**/
+
+.FileShowDiv span {
+    min-width: 60px;
+    min-height: 20px;
+    float: left;
+    font-size: 14px;
+    margin-top: 5px;
+    color: grey;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 13px;
+}
+
+.FileShowDiv a {
+    min-width: 60px;
+    min-height: 20px;
+    margin-left: 10px;
+    float: left;
+    margin-right: 30px;
+    font-size: 14px;
+    margin-top: 5px;
+    display: inline-block;
+    color: blue;
+    cursor: pointer;
+}
+
+.content-read-title {
+    width: 100%;
+    margin-left: 5%;
+    display: flex;
+    line-height: 25px;
+}
+
+.content-read-div {
+    width: 100%;
+    margin-left: 5%;
+    display: flex;
+    line-height: 22px;
+}
+
+.userIdea_div {
+    width: 100%;
+    float: left;
+}
+
+.userIdea_div_p1 {
+    font-size: 14px;
+    float: left;
+    min-width: 30px;
+    margin: 0px;
+    text-align: right;
+    padding-left: 10px;
+}
+
+.userIdea_div_pTime {
+    font-size: 14px;
+    float: left;
+    min-width: 30px;
+    margin: 0px;
+    text-align: right;
+    padding-left: 30px;
+}
+
+.userIdea_div_p2 {
+    width: 70%;
+    height: auto;
+    word-wrap: break-word;
+    word-break: break-all;
+    font-size: 14px;
+    float: left;
+    margin: 0px;
+    text-align: left;
+    padding-left: 3px;
+
+}
+
+.record_show_detailes {
+    font-size: 14px;
+    float: left;
+    margin: 0px;
+    text-align: left;
+    padding-left: 3px;
+    margin-left: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+
+}
+
+.record_show_detailesTime {
+    width: 140px;
+    font-size: 14px;
+    float: left;
+    margin: 0px;
+    text-align: left;
+    margin-left: 10px;
+
+}
+
+.record_show_name {
+    width: 50px;
+    font-size: 14px;
+    float: left;
+    margin: 0px;
+    text-align: left;
+    padding-left: 3px;
+    margin-left: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+
+}
+
+.record_show_detailesYes {
+    font-size: 14px;
+    float: left;
+    margin: 0px;
+    text-align: left;
+    padding-left: 3px;
+    margin-left: 10px;
+    color: #31CB88;
+}
+
+.record_show_detailes a {
+    color: blue;
+    cursor: pointer;
+
+}
+
+.record_read_TitleName {
+    width: 130px;
+    margin-top: 0px;
+}
+
+.record_read_name {
+    width: 70px;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 0px;
+
+}
+
+.record_read_red_status {
+    width: 50px;
+    font-size: 14px;;
+    color: #FA4A01;
+    margin-top: 0px;
+}
+
+.record_read_green_status {
+    width: 50px;
+    font-size: 14px;
+    color: #31CB88;
+    margin-top: 0px;
+}
+
+.record_read_red {
+    width: 50px;
+    font-size: 16px;
+    margin-left: 10px;
+    color: #FA4A01;
+    margin-top: 0px;
+}
+
+.record_read_green {
+    width: 50px;
+    font-size: 16px;
+    margin-left: 10px;
+    color: #31CB88;
+    margin-top: 0px;
+}
+
+.record_read_vertical {
+    width: 20px;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 0px;
+}
+
+.record_read_time {
+    width: 150px;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 0px;
+}
+
+
+.officedocreceivemanage_userSign {
+    width: 70%;
+    min-height: 60px;
+    /*border: 1px solid red;*/
+}
+
+.officedocreceivemanage_userSign img {
+    /*display: none;*/
+    margin-top: 10px;
+    width: 150px;
+    height: 40px;
+    float: left;
+}
+
+/**用于p标签自动换行*/
+.p_newline {
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+/**发文拟稿修改记录*/
+.record_show_div {
+    width: 100%;
+    float: left;
+}
+
+.record_show_Name {
+    font-size: 14px;
+    float: left;
+    min-width: 30px;
+    margin: 0px;
+    text-align: right;
+    padding-right: 5px;
+    padding-left: 10px;
+}
+
+.record_show_detailes {
+    font-size: 14px;
+    float: left;
+    margin: 0px;
+    text-align: left;
+    padding-left: 3px;
+    margin-left: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+
+}

@@ -1,0 +1,170 @@
+*{
+    font-family: 微软雅黑;
+}
+.theme-body-style{
+    padding: 10px;
+    background-color: #F0f3f6;
+}
+.theme-body-style .datagrid-wrap{
+    padding: 10px;
+    background: #fff !important;
+}
+.top-search{
+    padding: 3px 0 10px 0px;
+    background-color: #fff;
+    height: 20px;
+}
+.top-toolbar label {
+    font-size: 14px;
+    color: #333;
+}
+.top-search .top-search-input{
+    margin-right: 20px;
+    display: inline-block;
+}
+.top-search .button{
+    margin-left: 10px;
+}
+.toolbar-but{
+    position: relative;
+    padding: 10px 0 10px 0;
+    background-color: #fff;
+    min-height: 34px;
+}
+.right-search{
+    position: absolute;
+    width: 200px;
+    height: 34px;
+    right: 0;
+    display: inline-block;
+}
+.right-search .textbox {
+    height: 30px !important;
+    line-height: 30px !important;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+.right-search .textbox .textbox-prompt {
+    font-size: 14px !important;
+}
+.right-search .textbox .textbox-text {
+    height: 30px !important;
+    line-height: 30px !important;
+    font-size: 14px !important;
+    -moz-border-radius: 0;
+    -webkit-border-radius:0;
+    border-radius:0;
+}
+.right-search .searchbox-button{
+    width: 30px !important;
+    height: 32px !important;
+    background: url(../images/toolbar/searchbox_icon.png) no-repeat center center;
+}
+/*按钮样式*/
+a.button{
+    width: 68px;
+    height: 30px;
+    line-height:30px;
+    color: #fff;
+    font-size:14px;
+    display: inline-block;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+    /*margin-left: 10px;*/
+}
+a.button:active{
+    transform: scale(1.1,1.1);
+    -moz-transform: scale(1.1,1.1);
+    -webkit-transform: scale(1.1,1.1);
+    -ms-transform: scale(1.1,1.1);
+    -o-transform: scale(1.1,1.1);
+}
+.toolbar-but a.button{
+    margin-right:5px;
+}
+/*新增、确认、同意按钮*/
+a.add-but{
+    background: #0d9de3;
+}
+a.add-but:hover,active,focus{
+    background: #008ad5;
+}
+
+/*编辑按钮*/
+a.edit-but{
+    background: #31cbbe;
+}
+a.edit-but:hover,active,focus{
+    background: #2cbcb0;
+}
+/*禁用按钮*/
+a.disable-but{
+    background: #F5F5F5 !important;
+    color: #cccccc !important;
+    border: solid 1px #ddd;
+}
+/*打印按钮*/
+a.print-but{
+    background: #31cbbe;
+}
+a.print-but:hover,active,focus{
+    background: #2abd7d;
+}
+/*下载按钮*/
+a.down-but {
+    background: #ffb600;
+}
+a.down-but:hover,active,focus {
+    background: #fca901;
+}
+/*删除、不同意按钮*/
+a.del-but {
+    background: #ff6833;
+}
+a.del-but:hover,active,focus {
+    background: #fa4a01;
+}
+/*取消按钮*/
+a.cancel-but {
+    background: #cccccc;
+}
+a.cancel-but:hover,active,focus {
+    background: #acacac;
+}
+
+/*上传控件进度条样式*/
+.statusBar {
+    height: 63px;
+    /*padding: 0 20px;*/
+    line-height: 63px;
+    vertical-align: middle;
+    position: relative;
+}
+.statusBar .progress {
+    border: 1px solid #1483d8;
+    width: 198px;
+    background: #fff;
+    height: 18px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    color: #6dbfff;
+    position: relative;
+    margin-right: 10px;
+}
+.statusBar .progress span.percentage {
+    width: 0;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #1483d8;
+    position: absolute;
+}
+.statusBar .progress span.text {
+    position: relative;
+    z-index: 10;
+}

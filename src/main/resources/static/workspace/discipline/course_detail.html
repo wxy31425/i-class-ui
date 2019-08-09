@@ -1,0 +1,101 @@
+<head>
+    <meta charset="UTF-8">
+    <title>课程详情</title>
+</head>
+<body>
+<div id="course_detail" class="fromtbale_div clearfix">
+    <div class="rise-border">
+        <img src="../../img/logoImg.png" class="rise-border_logo">
+        <p class="rise-border_title">微课程在线学习</p>
+    </div>
+    <table class="fromtbale">
+        <tr>
+            <td align="center">课程名称：</td>
+            <td colspan="3" align="left" id="name"></td>
+        </tr>
+        <tr>
+            <td align="center">课程描述：</td>
+            <td colspan="3" align="left" id="detail"></td>
+        </tr>
+        <tr>
+            <td align="center">所属学科：</td>
+            <td align="left" id="discipline"></td>
+            <td align="center">课时数量：</td>
+            <td align="left" id="peroidNumber"></td>
+
+        </tr>
+        <tr>
+            <td align="center">创建时间：</td>
+            <td align="left" id="createTime"></td>
+            <td align="center">上线时间：</td>
+            <td align="left" id="publishTime"></td>
+        </tr>
+        <tr>
+            <td align="center">课程状态：</td>
+            <td align="left" id="status"></td>
+            <td align="center">主讲人：</td>
+            <td align="left" id="lecturer"></td>
+        </tr>
+        <tr>
+            <td align="center">课程图片：</td>
+            <td colspan="3" align="left" >
+                <div id="imgShow"></div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">课程课时：</td>
+            <td colspan="3" align="left" id="peroid" ></td>
+        </tr>
+
+    </table>
+
+</div>
+<script type="text/javascript">
+    function courseInit(){
+        var id = $("#dialogPage").dialog("options").queryParams;
+
+        $.get("/service/discipline/course/queryCourse?id="+id,function (data) {
+            if (data) {
+                $('#course_detail').find("#name").html(data.name);
+                $('#course_detail').find("#detail").html(data.details);
+                $('#course_detail').find("#createTime").html(format(data.createTime));
+                $('#course_detail').find("#publishTime").html(format(data.publishTime));
+                $('#course_detail').find("#lecturer").html(data.lecturer);
+                $('#course_detail').find("#peroidNumber").html(data.periodNumber);
+                $('#course_detail').find("#discipline").html(data.discipline.name);
+
+                switch (data.publishStatus) {
+                    case 0:
+                        $('#course_detail').find("#status").html("上线");
+                        break;
+                    case 1:
+                        $('#course_detail').find("#status").html("下线");
+                        break;
+                    case 2:
+                        $('#course_detail').find("#status").html("暂停");
+                        break;
+                    default:
+                }
+                if (data.imgUrl) {
+                    var courseIdAndNames = data.imgUrl.split("@");
+                    var courseIds = courseIdAndNames[0].split(",");
+                    var courseArray = new Array();
+                    for (var i = 0; i < courseIds.length; i++) {
+                        $.get("/service/fileserves/upload/queryOne?id=" + courseIds[i], function (result) {
+                            courseArray.push("<img src='" + "/service/fileserves/upload/loading/?fileName=" + result.filePath + "' width='320' height='180'/>");
+                            $("#imgShow").html(courseArray.join(""));
+                        })
+                    }
+                    var peroidArray = new Array();
+                    for (var j = 0; j < data.periods.length; j++) {
+                        peroidArray.push("<div>" + data.periods[j].name + "</div>");
+                    }
+                    $('#course_detail').find("#peroid").html(peroidArray.join(""));
+                }
+            }
+
+        })
+    }
+     courseInit();
+</script>
+</body>

@@ -1,0 +1,124 @@
+<head>
+    <meta charset="UTF-8">
+    <title>课程列表</title>
+    <link type="text/css" rel="stylesheet" href="../../js/jquery-easyui-1.5.3/themes/default/easyui.css"/>
+    <link type="text/css" rel="stylesheet" href="../../js/jquery-easyui-1.5.3/themes/icon.css"/>
+    <link type="text/css" rel="stylesheet" href="../../styles/main.css" />
+    <link type="text/css" rel="stylesheet" href="../../styles/theme.css" />
+    <link type="text/css" rel="stylesheet" href="../../js/webuploader-0.1.5/webuploader.tianran.css" />
+    <link type="text/css" rel="stylesheet" href="../../styles/currencyTable.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="../../styles/currencyTable.css" media="print" />
+    <script src="../../js/jquery-easyui-1.5.3/jquery.min.js"></script>
+    <script src="../../js/jquery-easyui-1.5.3/jquery.easyui.min.js"></script>
+    <script src="../../js/jquery-easyui-1.5.3/locale/easyui-lang-zh_CN.js"></script>
+    <script src="../../js/easyui.custom.js"></script>
+    <script src="../../js/dictionary.js"></script>
+    <script src="../../js/time.js"></script>
+    <script src="../../js/discipline/discipline.couse.js"></script>
+    <script src="../../js/webuploader-0.1.5/webuploader.tianran.js"></script>
+    <script src="../../js/webuploader-0.1.5/webuploader.js"></script>
+</head>
+<body>
+<style>
+    .pagination-style .pagination>table{
+        float: initial;
+        margin: 0 auto;
+    }
+    .pagination-style .pagination>.pagination-info{
+        height: initial;
+        line-height: initial;
+    }
+</style>
+<div id="course_list" class="easyui-panel theme-body-style" fit="true">
+    <div class="pagination-style" style="width:25%;height: 100%; float: left;background: #fff">
+        <div id="discipline_toolbar" class="top-toolbar">
+            <div id="discipline_but">
+                <div>
+                    <a  class="easyui-linkbutton" plain="true" iconCls="icon-add" onclick="propertyDiscipline.dialog('/workspace/discipline/discipline_add.html','新增学科',400,400);">新增</a>
+                    <a  class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="propertyDiscipline.editDiscipline('/workspace/discipline/discipline_edit.html',' 编辑学科',400,400);">修改</a>
+                    <a  class="easyui-linkbutton" plain="true" iconCls="icon-remove" onclick="propertyDiscipline.delDiscipline('/service/discipline/discipline/remove','删除学科','POST')">删除</a>
+                </div>
+            </div>
+        </div>
+        <table id="discipline_list_grid" class="easyui-datagrid" toolbar="#discipline_toolbar" data-options="
+                    contentType:'application/json;charset=UTF-8',
+                    url:'/service/discipline/discipline/queryAll',
+                    paramsType:'json',
+                    method:'get',
+                    fitColumns:true,
+                    pagination:true,
+                    singleSelect:true,
+                    checkOnSelect:false,
+                    selectOnCheck:false,
+                    striped:true,
+                    rownumbers:true,
+                    fit: true,
+                    pageSize: 5,
+                    loadFilter:EasyUIDataGridLoadFilter,
+                    loadMsg:'正在加载数据，请稍后...'">
+            <thead>
+            <tr>
+                <th data-options="field:'id',checkbox:true,align:'center'"></th>
+                <th data-options="field:'name',width:10,halign:'center'">学科名称</th>
+                <th data-options="field:'createTime',width:20,align:'center',formatter:propertyDiscipline.dataGridFormatTime">创建时间</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+<div style="width:calc(75% - 10px);height:100%; float: right;background: #fff">
+    <div id="course_toolbar" class="top-toolbar">
+        <div class="tableFind">
+            <label>课程名称</label>
+            <input  id="name" class="easyui-textbox"/>
+            <label>课程状态</label>
+            <select class="easyui-combobox" id="publishStatus" style="width:200px;">
+                <option value= "">---请选择---</option>
+                <option value="1">上线</option>
+                <option value="0">下线</option>
+                <option value="2">暂停</option>
+            </select>
+            <a  class="easyui-linkbutton tableFindBut" data-options="iconCls:'icon-search'" onclick="propertyDiscipline.dataSearch()">查询</a>
+            <a  class="easyui-linkbutton tableFindBut" data-options="iconCls:'icon-redo'" onclick="propertyDiscipline.dataReset()">重置</a>
+        </div>
+        <div id="course_but">
+            <div>
+                <a class="easyui-linkbutton" plain="true" iconCls="icon-add"onclick="propertyDiscipline.dialog('/workspace/discipline/course_add.html','新增课程',600,500);">新增</a>
+                <a class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="propertyDiscipline.editCourse('/workspace/discipline/course_edit.html','编辑课程',600,500);">修改</a>
+                <a class="easyui-linkbutton" plain="true" iconCls="icon-remove" onclick="propertyDiscipline.delCourse('/service/discipline/course/remove','删除课程','POST',600,500);">删除</a>
+            </div>
+        </div>
+    </div>
+    <table id="course_list_grid" class="easyui-datagrid" toolbar="#course_toolbar" data-options="
+                    contentType:'application/json;charset=UTF-8',
+                    url:'/service/discipline/course/queryAll',
+                    paramsType:'json',
+                    method:'get',
+                    fitColumns:true,
+                    pagination:true,
+                    singleSelect:true,
+                    checkOnSelect:false,
+                    selectOnCheck:false,
+                    striped:true,
+                    rownumbers:true,
+                    fit: true,
+                    pageSize: 5,
+                    loadFilter:EasyUIDataGridLoadFilter,
+                    loadMsg:'正在加载数据，请稍后...'">
+        <thead>
+        <tr>
+            <th data-options="field:'id',checkbox:true,align:'center'"></th>
+            <th data-options="field:'name',width:10,halign:'center',formatter:propertyDiscipline.dataGridFormatId">课程名称</th>
+            <th data-options="field:'details',width:20,halign:'center'">课程描述</th>
+            <th data-options="field:'lecturer',width:10,align:'center'">主讲人</th>
+            <th data-options="field:'createTime',width:10,align:'center',formatter:propertyDiscipline.dataGridFormatTime">创建时间</th>
+            <th data-options="field:'publishTime',width:10,align:'center',formatter:propertyDiscipline.dataGridFormatTime">上线时间</th>
+            <th data-options="field:'publishStatus',width:10,align:'center',formatter:propertyDiscipline.dataGridStatus">课程状态</th>
+            <th data-options="field: 'hot',width:10,align:'center',formatter:propertyDiscipline.dataGridhot">是否是热门课程</th>
+
+        </tr>
+        </thead>
+    </table>
+</div>
+</div>
+</body>
+</html>

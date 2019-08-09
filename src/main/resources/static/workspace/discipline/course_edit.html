@@ -1,0 +1,104 @@
+<head>
+    <meta charset="UTF-8">
+    <title>课程编辑</title>
+</head>
+<body>
+    <div id="course_edit" >
+        <form id="form" class="easyui-form" method="POST">
+            <input type="hidden" name="id">
+            <div class="formDiv">
+                <label>课程名称:</label>
+                <input type="text" name="name" class="easyui-validatebox"  data-options="required:true">
+                <span class="formSpan">*</span>
+            </div>
+            <div class="formDiv">
+                <label class="textarea">课程描述:</label>
+                <textarea name="details"  id="details" style="height:100px"  onkeyup="cal();" maxlength="50" onpropertychange="if(value.length>50) value=value.substr(0,50)"></textarea>
+            </div>
+            <div class="formDiv">
+                <label>主讲人:</label>
+                <input type="text" name="lecturer" class="easyui-validatebox"  data-options="required:true">
+                <span class="formSpan">*</span>
+            </div>
+
+            <div class="formDiv">
+                <label>上传图片:</label>
+                <a class="button add-but" id="courseImg_upload_btn" style="line-height:22px;height: 25px">点击上传</a>
+                <div id="courseImg_upload_queue" class="uploader-list"></div>
+                <input type="hidden" name="imgUrl" id="imgIds"/>
+                <input type="hidden" name="mobileImgUrl" id="mobileImgPath"/>
+            </div>
+
+            <div class="file-item">
+                <div id="courseImgShow"></div>
+            </div>
+
+            <div class="formDivCombox">
+                <label>所属学科:</label>
+                <input id="belongDiscipline" class="easyui-combox" name="discipline.id" style="width: 300px;" data-options="editable:false,panelHeight:160 " prompt="请选择学科..."
+                       data-options="required:true"/>
+                <span class="formSpan">*</span>
+            </div>
+
+            <div class="formDivCombox">
+                <label>是否是热门课程:</label>
+                <input id="hotId" name="hot" class="easyui-switchbutton"  data-options="onText:'是',offText:'否'">
+            </div>
+
+            <div class="forSubmint">
+                <a href="#" class="easyui-linkbutton"  iconCls="icon-ok" onclick="propertyDiscipline.editDataCourse('/service/discipline/course/saveOne');">保存</a>
+                <a href="#" class="easyui-linkbutton" id="res" iconCls="icon-redo" onclick="propertyDiscipline.resetData()" >重置</a>
+            </div>
+        </form>
+    </div>
+</div>
+    <script>
+        function cal() {
+            var length = $("#details").val().length;
+            if (length > 50) {
+                alert("字数请在50字以内.");
+            }
+        }
+        dictionary.getOtherDictionarieNoSelect(
+            $("#course_edit").find("#form").find("#belongDiscipline"),
+            "/service/discipline/course/queryDisciplineAll","id","name",'get');
+
+        /**
+         * 上传图片
+         */
+        var addUploaderImg;
+        var courseImg_upload = new WebuploaderTianran("courseImg_upload", "#courseImg_upload_queue");
+        $(function () {
+            addUploaderImg = WebUploader.create({
+                auto: true,
+                swf: '../../js/webuploader-0.1.5/Uploader.swf',
+                pick: '#courseImg_upload_btn',
+                server: '/service/fileserves/upload/file',
+                formData: {defaultPath: ""},
+                accept: {
+                    title: 'Images',
+                    extensions: 'jpg,png',
+                    mimeTypes: 'image/*'
+                },
+                duplicate: true
+            });
+
+            addUploaderImg.on('fileQueued', function (file) {
+                courseImg_upload.fileQueued(file);
+            });
+            addUploaderImg.on('uploadProgress', function (file, percentage) {
+                courseImg_upload.progress(file, percentage);
+            });
+            addUploaderImg.on('uploadSuccess', function (file, response) {
+                courseImg_upload.imgShow(file,response,"/service/fileserves/upload/loading/?fileName="+response.data[0].filePath);
+
+            });
+            addUploaderImg.on('uploadError', function (file) {
+                $('#' + file.id).find('p.state').text('上传出错');
+            });
+        })
+
+    </script>
+
+
+</body>

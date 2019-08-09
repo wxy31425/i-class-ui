@@ -1,0 +1,46 @@
+spring:
+    tomcat:
+      max-active: 40
+      max-idle: 30
+      max-wait: 3000
+      min-idle: 10
+      initial-size: 5
+      test-while-idle: true
+      time-between-eviction-runs-millis: 30000
+      min-evictable-idle-time-millis: 1800000
+      test-on-borrow: false
+      uri-encoding: UTF-8
+    http:
+      encoding:
+        charset: UTF-8
+        enabled: true
+        force: true
+
+      multipart:
+        max-file-size: 500Mb
+        max-request-size: 1000Mb
+
+zuul:
+  routes:
+    discipline:
+      path: /service/discipline/**
+      url: http://127.0.0.1:8081
+      sensitive-headers:
+    fileserves:
+      path: /service/fileserves/**
+      url: http://127.0.0.1:8082
+      sensitive-headers:
+    business:
+      path: /service/business/**
+      url: http://127.0.0.1:8083
+      sensitive-headers:
+server:
+  port: 8080
+
+thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    mode: HTML5

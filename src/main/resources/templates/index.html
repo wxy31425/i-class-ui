@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>微课程在线学习系统管理平台</title>
+    <link type="text/css" rel="stylesheet" href="../js/jquery-easyui-1.5.3/themes/default/easyui.css"/>
+    <link type="text/css" rel="stylesheet" href="../js/jquery-easyui-1.5.3/themes/icon.css"/>
+    <link type="text/css" rel="stylesheet" href="../styles/main.css"/>
+
+</head>
+<body>
+
+<div class="easyui-layout" id="mainBox">
+    <div data-options="region:'north',split:true" style="height: 80px" class="mainTop">
+        <div class="topLogin"><img src="img/logoImg.png"/> <div class="topLongRight">i-class微课程在线学习系统管理平台</div></div>
+        <div class="topText">
+<!--            <a href="../workspace/home.html" target="frameName">-->
+<!--                <p style="margin-top: 10px"><img src="img/home.png"/> </p>-->
+<!--                <p style="margin-top: 5px">系统首页</p>-->
+<!--            </a>-->
+<!--            <a href="#" target="frameName" >-->
+<!--                <p style="margin-top: 10px"><img src="img/computer.png"/> </p>-->
+<!--                <p style="margin-top: 5px">流程图</p>-->
+<!--            </a>-->
+<!--            <a href="#"  target="frameName">-->
+<!--                <p style="margin-top: 10px"><img src="img/ogrn.png"/> </p>-->
+<!--                <p style="margin-top: 5px">统计分析</p>-->
+<!--            </a>-->
+<!--            <a href="#" target="frameName">-->
+<!--                <p style="margin-top: 10px"><img src="img/action.png"/> </p>-->
+<!--                <p style="margin-top: 5px">报表填写</p>-->
+<!--            </a>-->
+        </div>
+        <div href="javascript:void(0)" id="user_login_show_name" class="easyui-menubutton topMean"
+             data-options="menu:'#mm',iconCls:'icon-admin'"></div>
+        <div id="mm" >
+            <div data-options="iconCls:'icon-man'"><a href="javascript:void(0)" onclick="editUpassword()">修改密码</a> </div>
+            <div data-options="iconCls:'icon-cancel'"><a href="javascript:void(0)" onclick="cancellation()"> 注销</a></div>
+
+        </div>
+    </div>
+    <div data-options="region:'south',split:true" style="height:40px;" class="footStyle">
+        版本所有@2018-2019天然科技有很责任公司
+    </div>
+    <div  data-options="region:'west',title:'功能菜单',split:true,iconCls:'icon-left01'" style="width:200px;">
+        <div class="easyui-accordion" >
+            <div title="学科管理" data-options="iconCls:'icon-left05',selected:true" class="mainPanle">
+                <p><i class="i_a i_user"></i>
+                    <a href="#" onclick="addTab('课程管理','../workspace/discipline/course_list.html')">课程管理</a>
+                </p>
+                <p><i class="i_a i_user"></i>
+                    <a  href="#" onclick="addTab('课时管理','../workspace/class/class_list.html')">课时管理</a>
+                </p>
+            </div>
+            <div title="广告管理" data-options="iconCls:'icon-remove'" class="mainPanle">
+                <p><i class="i_a i_table"></i>
+                <a  href="#" onclick="addTab('广告信息','../workspace/advertising/advertising_list.html')">广告信息</a>
+                </p>
+            </div>
+            <div title="用户管理" data-options="iconCls:'icon-left02'" class="mainPanle">
+                <p><i class="i_a i_user"></i>
+                    <a  href="#" onclick="addTab('用户信息','../workspace/user/user_list.html')">用户信息</a>
+                </p>
+            </div>
+            <div title="职场新闻" data-options="iconCls:'icon-left03'" class="mainPanle"></div>
+        </div>
+    </div>
+
+
+
+    <div data-options="region:'center'" style="padding:5px;background:#eee;">
+        <div id="tabMenu" class="easyui-tabs" data-options="tools:'#tab-tools',fit:true">
+            <div title="系统首页" >
+                <iframe frameborder="0" width="100%" height="100%" name="frameName" src="../workspace/home.html" scrolling="auto"></iframe>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="myPassword">
+    <form id="form"  class="easyui-form" method="POST">
+    <div class="formDiv">
+        <label>新密码:</label>
+        <input  id="pwd" type="password" class="easyui-validatebox" name="password" data-options="required:true" placeholder="请输入新密码"/>
+        <span class="formSpan">*</span>
+        <div class="formDiv">
+            <label>确认密码:</label>
+            <input id="confirmPwd" type="password" class="easyui-validatebox" data-options="required:true" placeholder="确认新密码"
+                   validType="confirmPassword['#form input[name=password]']"/>
+            <span class="formSpan">*</span>
+        </div>
+    </div>
+        <div class="forSubmint">
+            <a href="#" class="easyui-linkbutton"  iconCls="icon-ok" onclick="save('/service/discipline/admin/reset-password');">保存</a>
+            <a href="#" class="easyui-linkbutton" id="res" iconCls="icon-redo" onclick="resetData()" >重置</a>
+        </div>
+    </form>
+</div>
+
+<script src="../js/jquery-easyui-1.5.3/jquery.min.js"></script>
+<script src="../js/jquery-easyui-1.5.3/jquery.easyui.min.js"></script>
+<script src="../js/easyui.custom.js"></script>
+<script src="../js/jquery-easyui-1.5.3/locale/easyui-lang-zh_CN.js"></script>
+<script src="../js/index.js"></script>
+
+</body>
+</html>
